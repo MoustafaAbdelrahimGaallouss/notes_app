@@ -20,6 +20,9 @@ class EditNoteViewBody extends StatelessWidget {
             title: 'Edit Note',
             icon: Icons.done,
           ),
+          SizedBox(
+            height: 50,
+          ),
           customTextField(
             hintText: 'Title',
           ),
@@ -29,13 +32,6 @@ class EditNoteViewBody extends StatelessWidget {
           customTextField(
             hintText: 'content',
             maxLines: 5,
-          ),
-          SizedBox(
-            height: 40,
-          ),
-          customButton(),
-          SizedBox(
-            height: 24,
           ),
         ],
       ),
