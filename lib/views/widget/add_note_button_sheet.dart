@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/constants.dart';
-import 'package:note_app/views/widget/custon_text_field.dart';
+import 'package:note_app/views/widget/custom_text_field.dart';
 
 class addNoteModelsButtonSheet extends StatelessWidget {
   const addNoteModelsButtonSheet({super.key});
@@ -12,11 +12,15 @@ class addNoteModelsButtonSheet extends StatelessWidget {
       child: Column(
         children: [
           customTextField(
-            itemName: 'Title',
+            hintText: 'Title',
           ),
           SizedBox(
             height: 24,
           ),
+          customTextField(
+            hintText: 'content',
+            maxLines: 10,
+          )
         ],
       ),
     );
