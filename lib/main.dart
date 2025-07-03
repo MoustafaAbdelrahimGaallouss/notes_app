@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/views/edit_note_view.dart';
-import 'package:note_app/views/notes_view.dart';
 
 void main() {
   runApp(const noteApp());
 }
 
 class noteApp extends StatelessWidget {
-  const noteApp({Key? key}) : super(key: key);
+  const noteApp({super.key});
 
   // This widget is the root of your application.
   @override
