@@ -7,41 +7,80 @@ class addNoteModelsButtonSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
       child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Add Note',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+        child: addNoteForm(),
+      ),
+    );
+  }
+}
+
+class addNoteForm extends StatefulWidget {
+  const addNoteForm({
+    super.key,
+  });
+
+  @override
+  State<addNoteForm> createState() => _addNoteFormState();
+}
+
+class _addNoteFormState extends State<addNoteForm> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  String? title, subTitle;
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKey,
+      autovalidateMode: autovalidateMode,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Add Note',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
             ),
-            SizedBox(
-              height: 16,
-            ),
-            customTextField(
-              hintText: 'Title',
-            ),
-            SizedBox(
-              height: 24,
-            ),
-            customTextField(
-              hintText: 'content',
-              maxLines: 5,
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            customButton(),
-            SizedBox(
-              height: 24,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          customTextField(
+            onSaved: (value) {
+              title = value;
+            },
+            hintText: 'Title',
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          customTextField(
+            hintText: 'content',
+            maxLines: 5,
+            onSaved: (value) {
+              subTitle = value;
+            },
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          customButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+              } else {
+                autovalidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+        ],
       ),
     );
   }
