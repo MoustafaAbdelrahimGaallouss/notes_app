@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../constants.dart';
 
 class customButton extends StatelessWidget {
-  customButton({
+  const customButton({
     super.key,
     required this.onPressed,
   });
