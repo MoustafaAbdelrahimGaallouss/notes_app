@@ -11,11 +11,11 @@ void main() async {
   await Hive.openBox(kNotesBox);
   Hive.registerAdapter(NoteModelAdapter()); // Open the box for notes
 
-  runApp(noteApp());
+  runApp(const noteApp());
 }
 
 class noteApp extends StatelessWidget {
-  noteApp({super.key});
+  const noteApp({super.key});
 
   // This widget is the root of your application.
   @override

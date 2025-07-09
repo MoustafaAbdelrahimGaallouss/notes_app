@@ -1,86 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:note_app/views/widget/custom_button.dart';
-import 'package:note_app/views/widget/custom_text_field.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:note_app/cubits/add_note_cubite/add_note_cubit_cubit.dart';
+import 'package:note_app/views/widget/add_note_form.dart';
 
 class addNoteModelsButtonSheet extends StatelessWidget {
   const addNoteModelsButtonSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 16),
       child: SingleChildScrollView(
-        child: addNoteForm(),
-      ),
-    );
-  }
-}
+        child: BlocConsumer<AddNoteCubit, AddNoteState>(
+          listener: (context, state) {
+            if (state is AddNoteSucessState) {
+              Navigator.pop(context);
+            }
 
-class addNoteForm extends StatefulWidget {
-  const addNoteForm({
-    super.key,
-  });
-
-  @override
-  State<addNoteForm> createState() => _addNoteFormState();
-}
-
-class _addNoteFormState extends State<addNoteForm> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  String? title, subTitle;
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      autovalidateMode: autovalidateMode,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Add Note',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          customTextField(
-            onSaved: (value) {
-              title = value;
-            },
-            hintText: 'Title',
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          customTextField(
-            hintText: 'content',
-            maxLines: 5,
-            onSaved: (value) {
-              subTitle = value;
-            },
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          customButton(
-            onPressed: () {
-              if (formKey.currentState!.validate()) {
-                formKey.currentState!.save();
-              } else {
-                autovalidateMode = AutovalidateMode.always;
-                setState(() {});
-              }
-            },
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-        ],
+            if (state is AddNoteErrorState) {
+              print(state.errorMessage);
+            }
+          },
+          builder: (context, state) {
+            return ModalProgressHUD(
+                inAsyncCall: state is AddNoteLoadingState ? true : false,
+                child: const addNoteForm());
+          },
+        ),
       ),
     );
   }
