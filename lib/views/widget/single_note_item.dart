@@ -38,7 +38,7 @@ class NoteItem extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                // Handle delete action
+                note.delete();
               },
             ),
           ),
