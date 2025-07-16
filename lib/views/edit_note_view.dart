@@ -11,7 +11,10 @@ class EditNoteView extends StatelessWidget {
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: EditNoteViewBody(note: note,),
+      child: SingleChildScrollView(
+          child: EditNoteViewBody(
+        note: note,
+      )),
     ));
   }
 }
