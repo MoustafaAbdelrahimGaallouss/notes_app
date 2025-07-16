@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:note_app/cubits/add_note_cubite/add_note_cubit_cubit.dart';
 import 'package:note_app/models/note_model.dart';
-import 'package:note_app/views/widget/color_list_vies.dart';
+import 'package:note_app/views/widget/color_list_views.dart';
 import 'package:note_app/views/widget/custom_button.dart';
 import 'package:note_app/views/widget/custom_text_field.dart';
 
@@ -29,11 +29,14 @@ class _addNoteFormState extends State<addNoteForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            'Add Note',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          Padding(
+            padding: const EdgeInsets.only(top: 16.0),
+            child: Text(
+              'Add Note',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
           const SizedBox(
@@ -56,7 +59,7 @@ class _addNoteFormState extends State<addNoteForm> {
             },
           ),
           const SizedBox(
-            height: 12,
+            height: 32,
           ),
           colorsListView(),
           const SizedBox(
